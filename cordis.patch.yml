@@ -1,0 +1,4 @@
+# dsh-memory-panel bundle layer.
+- insert:
+    - id: memory-panel
+      name: '@local/dsh-memory-panel'

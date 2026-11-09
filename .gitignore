@@ -1,0 +1,7 @@
+node_modules/
+*.tgz
+*.log
+.build-mnemon-archive.mjs
+.list-mnemon.mjs
+.DS_Store
+Thumbs.db
