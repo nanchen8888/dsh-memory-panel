@@ -39,19 +39,22 @@
 
 ## 安装
 
-本机 `C:\Users\Administrator\.dsh` 是指向 `D:\dsh-home` 的 junction；直接安装 bundle 目录时
-pnpm 生成的相对符号链接穿过 junction 会断掉（`dsh: cannot resolve profile bundle`）。
-所以先打包、再装 tarball：
+先在本目录打包：
 
 ```powershell
-cd D:\deepseek-harness\dsh-memory-panel
 # 改动后先改 package.json 的 version，避免复用旧 tarball
 npm pack --silent
 ```
 
+再把生成的 tarball 装进 DSH profile（把路径换成你自己的绝对路径）：
+
 ```
-plugin_manager action=install_bundle target="D:\\deepseek-harness\\dsh-memory-panel\\local-dsh-memory-panel-0.5.0.tgz"
+plugin_manager action=install_bundle target="<绝对路径>\\local-dsh-memory-panel-0.5.1.tgz"
 ```
+
+> Windows 提示：如果你的 `~/.dsh` 是指向其它盘的 junction，直接安装 bundle 目录时
+> pnpm 生成的相对符号链接会穿过 junction 断掉（`dsh: cannot resolve profile bundle`）。
+> 这种情况下用 tarball 安装最稳。
 
 安装后客户端半即时热挂载；Host 半的 Node 模块要等 DSH 客户端下次启动才换新代码。
 装了本插件后可以卸载 `dsh-plugin-memory`，boot 注入与 digest 提醒由本插件接管。
